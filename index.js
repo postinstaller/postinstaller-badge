@@ -1,11 +1,15 @@
 const {join} = require('path')
+
+const badgen = require('badgen')
 const {send} = require('micro')
+const _get = require('lodash.get')
 
 const got = require('got')
 
 const jot = got.extend({
   baseUrl: 'https://unpkg.com/',
-  json: true
+  json: true,
+  throwHttpErrors: false
 })
 
 module.exports = async (req, res) => {
@@ -14,14 +18,21 @@ module.exports = async (req, res) => {
       send(res, 404, '404')
       return
     }
+    const url = require('url').parse(req.url, true)
 
-    const {body} = await jot(join(req.url.replace(/\?.*/, ''), 'package.json'))
-    const hasPostinstaller = Boolean(body.postinstaller)
-    const status = hasPostinstaller ? 'ready' : 'missing'
-    const color = hasPostinstaller ? 'green' : 'red'
-    const [/* unused */, /* unused */, options] = req.url.match(/^(.*?)(\?.*)/) || [undefined, undefined, '']
-    const url = `https://img.shields.io/badge/postinstaller-${status}-${color}.svg${options}`
-    send(res, 200, got.stream(url))
+    const pkgResponse = await jot(join(req.url.replace(/\?.*/, ''), 'package.json'))
+
+    const hasPostinstaller = Boolean(_get(pkgResponse, 'body.postinstaller'))
+    const error = pkgResponse.statusCode >= 400
+    const status = error ? 'error' : hasPostinstaller ? 'ready' : 'missing'
+    res.setHeader('Content-type', 'image/svg+xml')
+    res.setHeader('X-Status', status)
+    send(res, pkgResponse.statusCode, badgen({
+      subject: 'postinstaller',
+      status,
+      color: error ? 'red' : hasPostinstaller ? 'green' : 'orange',
+      style: url.query.style
+    }))
   } catch (error) {
     console.log(error)
     send(res, error.statusCode || 500, error.message || 'Error')

@@ -1,9 +1,9 @@
 # postinstaller-badge
 
-Get a funky badge for your postinstaller package.
+Get a funky badge for your postinstaller package and show the world you’re zero-config.
 
-+  ![postinstaller](https://postinstaller-badge.now.sh/postinstaller?style=flat-square)
-+  ![postinstaller](https://postinstaller-badge.now.sh/lodash?style=flat-square)
++   ![postinstaller](https://postinstaller-badge.now.sh/postinstaller?style=flat)
++   ![postinstaller](https://postinstaller-badge.now.sh/lodash?style=flat)
 
 #### URL
 
@@ -17,9 +17,4 @@ https://postinstaller-badge.now.sh/<npm-module-name>
 ```
 
 ### Styles
-`postinstaller-badge` uses the fabulous [shields.io](https://shields.io) to build the badges and thus supports all its style options:
-
-+   `style=plastic`
-+   `style=flat`
-+   `style=flat-square`
-+   etc
+`postinstaller-badge` uses the fabulous [badgen](https://badgen.net) and supports `flat` and `classic` styles. Simply append the style to the url, e.g. `https://postinstaller-badge.now.sh/postinstaller?style=flat`.
