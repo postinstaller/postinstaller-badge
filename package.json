@@ -7,7 +7,6 @@
     "dev": "micro-dev",
     "start": "micro",
     "release": "standard-version",
-    "pretest": "xo",
     "test": "nyc ava"
   },
   "keywords": [],
@@ -41,7 +40,8 @@
     "badgen": "^2.5.0",
     "got": "^9.3.2",
     "lodash.get": "^4.4.2",
-    "micro": "^9.3.3"
+    "micro": "^9.3.3",
+    "package-json": "^5.0.0"
   },
   "standard-version": {
     "scripts": {
