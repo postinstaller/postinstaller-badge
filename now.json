@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "alias": "postinstaller-badge",
+  "builds": [
+    { "src": "*.md", "use": "@now/md", "config": { "css": "https://unpkg.com/github-markdown-css"} },
+    { "src": "*.js", "use": "@now/node" }
+  ],
+  "routes": [
+    { "src": "/", "dest": "/README.html" },
+    { "src": "/favicon.ico", "status": 404 },
+    { "src": "/.+", "dest": "/index.js" }
+  ],
+  "public": false
+}

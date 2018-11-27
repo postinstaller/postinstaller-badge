@@ -1,0 +1,41 @@
+{
+  "name": "postinstaller-badge",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "micro-dev",
+    "start": "micro",
+    "test": "xo && ava"
+  },
+  "keywords": [],
+  "author": "Andreas Pizsa <hopster@gmail.com> (https://github.com/AndreasPizsa)",
+  "license": "MIT",
+  "devDependencies": {
+    "@commitlint/cli": "^7.2.1",
+    "@commitlint/config-conventional": "^7.1.2",
+    "ava": "1.0.0-rc.2",
+    "husky": "^1.2.0",
+    "nyc": "^13.1.0",
+    "standard-version": "^4.4.0",
+    "xo": "^0.23.0"
+  },
+  "xo": {
+    "semicolon": false,
+    "space": true
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "dependencies": {
+    "got": "^9.3.2",
+    "micro": "^9.3.3"
+  }
+}
