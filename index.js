@@ -23,10 +23,10 @@ module.exports = async (req, res) => {
     res.setHeader('Content-type', 'image/svg+xml')
     res.setHeader('X-Status', status)
     send(res, error ? 404 : 200, badgen({
-      subject: 'postinstaller',
       status,
-      color: error ? 'red' : hasPostinstaller ? 'green' : 'orange',
-      style: url.query.style
+      color  : error ? 'red' : hasPostinstaller ? 'green' : 'orange',
+      style  : url.query.style,
+      subject: 'postinstaller'
     }))
     res.end()
   } catch (error) {
