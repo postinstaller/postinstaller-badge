@@ -1,6 +1,5 @@
 const badgen = require('badgen')
 const {send} = require('micro')
-const _get = require('lodash.get')
 
 module.exports = async (req, res) => {
   try {
@@ -11,7 +10,6 @@ module.exports = async (req, res) => {
 
     const url = require('url').parse(req.url, true)
     const packageName = req.url.replace(/\?.*/, '').substr(1)
-    console.log(packageName)
 
     const pkgResponse = await (
       require('package-json')(packageName, {fullMetadata: true})
